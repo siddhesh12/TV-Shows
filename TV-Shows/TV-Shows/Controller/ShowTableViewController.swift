@@ -7,28 +7,30 @@
 //
 
 import UIKit
+import SDWebImage
 
-protocol ShowTableViewControllerDelegate: class {
-  func showSelected(_ show: Show)
-}
+fileprivate let reuseIdentifier = "tableViewCell"
+fileprivate let segueID = "detailSegueID"
+
+fileprivate let height:CGFloat = 100.0
 
 class ShowTableViewController: UITableViewController {
-  weak var delegate: ShowTableViewControllerDelegate?
-  private var collapseDetailViewController = true
   var days:[Day] = []
   var nextDateCount:Int = 0
   
     override func viewDidLoad() {
       super.viewDidLoad()
-//      splitViewController?.delegate = self
+      splitViewController?.delegate = self
       splitViewController?.preferredDisplayMode = .allVisible
       getShows(date: Date())
     }
   
   func getShows(date:Date) {
     let network = NetworkManager()
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     network.getShows(date: date) { [weak self] result in
       guard let strongSelf = self else { return }
+      UIApplication.shared.isNetworkActivityIndicatorVisible = false
       switch result {
       case .success(let day):
         strongSelf.days.append(day)
@@ -42,6 +44,22 @@ class ShowTableViewController: UITableViewController {
   func getNextDate() -> Date {
     nextDateCount += 1
     return Calendar.current.date(byAdding: .day, value: nextDateCount, to: Date())!
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == segueID {
+      var detailVC: DetailViewController!
+      
+      if let detailNavigationController = segue.destination as? UINavigationController {
+        detailVC = detailNavigationController.topViewController as! DetailViewController
+        detailVC.navigationItem.leftItemsSupplementBackButton = true
+      } else {
+        detailVC = segue.destination as! DetailViewController
+      }
+      
+      guard let selectedRowIndexPath = tableView.indexPathForSelectedRow, let show = days[selectedRowIndexPath.section].show?[selectedRowIndexPath.row] else { return }
+      detailVC.show = show
+    }
   }
 }
 
@@ -64,18 +82,23 @@ extension ShowTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! ShowTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ShowTableViewCell
     let show = days[indexPath.section].show?[indexPath.row]
     cell.titleLabel.text = show?.name
     cell.timeLabel.text = show?.airTime
     cell.networkLabel.text = show?.network.name
     cell.accessoryView = UIImageView(image: UIImage(named: "BackArrow"))
-    cell.postImageView.image = UIImage(named: "1")
+    if let posterUrl = show?.poster?.medium {
+        cell.postImageView.sd_setImage(with: URL(string: posterUrl), completed: nil)
+    } else {
+      cell.postImageView.backgroundColor = UIColor(red: 27/255, green: 28/255, blue: 29/255, alpha: 1)
+    }
+    
     return cell
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
+    return height
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -87,18 +110,10 @@ extension ShowTableViewController {
     header.backgroundView?.backgroundColor = UIColor(red: 27/255, green: 28/255, blue: 29/255, alpha: 1)
     header.textLabel?.textColor = UIColor(red: 238/255, green: 154/255, blue: 55/255, alpha: 1)
   }
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let show = days[indexPath.section].show?[indexPath.row] else { return }
-    collapseDetailViewController = false
-    delegate?.showSelected(show)
-    if let detailViewController = delegate as? DetailViewController,
-      let detailNavigationController = detailViewController.navigationController {
-      splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
-    }
-  }
 }
 
 extension ShowTableViewController: UISplitViewControllerDelegate {
-  
+  func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
+    return true
+  }
 }

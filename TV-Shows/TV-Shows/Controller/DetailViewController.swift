@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
   var show: Show!
-
+  @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var summaryLabel: UILabel!
   @IBOutlet weak var seasonLabel: UILabel!
   @IBOutlet weak var episodeLabel: UILabel!
@@ -18,25 +18,22 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var durationLabel: UILabel!
   override func viewDidLoad() {
         super.viewDidLoad()
+        loadValues()
     }
   
   func loadValues() {
-    if let summary = show.summary {
-    summaryLabel.text = summary.htmlToString
+    if show != nil {
+      contentView.alpha = 1
+      if let summary = show.summary {
+        summaryLabel.text = summary.htmlToString
+      }
+      seasonLabel.text = show.seasonNumber != nil ? "\(show.seasonNumber!)" : ""
+      episodeLabel.text = show.episodeNumber != nil ? "\(show.episodeNumber!)" : ""
+      if let genres = show.genres {
+        genreLabel.text = genres.isEmpty ? "-" : genres
+      }
+      durationLabel.text = show.duration != nil ? "\(show.duration!) Mins" : ""
     }
-    seasonLabel.text = show.seasonNumber != nil ? "\(show.seasonNumber!)" : ""
-    episodeLabel.text = show.episodeNumber != nil ? "\(show.episodeNumber!)" : ""
-    if let genres = show.genres {
-      genreLabel.text = genres.isEmpty ? "-" : genres
-    }
-    durationLabel.text = show.duration != nil ? "\(show.duration!) Mins" : ""
-  }
-}
-
-extension DetailViewController: ShowTableViewControllerDelegate {
-  func showSelected(_ show: Show) {
-    self.show = show
-    loadValues()
   }
 }
 

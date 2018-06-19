@@ -22,7 +22,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qE-8a-Rp8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVx-Zy-2y5" userLabel="contentView">
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVx-Zy-2y5" userLabel="contentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="337"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMQ-lo-GYE" userLabel="About the Show">
@@ -187,6 +187,7 @@
                     <navigationItem key="navigationItem" title="Detail" id="Ift-Gr-t3y"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
+                        <outlet property="contentView" destination="pVx-Zy-2y5" id="p8g-hu-Hdj"/>
                         <outlet property="durationLabel" destination="HrH-31-Hdp" id="PYe-OX-H3f"/>
                         <outlet property="episodeLabel" destination="bSd-Jf-UDd" id="eaF-KA-Zfz"/>
                         <outlet property="genreLabel" destination="fie-Sn-SLK" id="ZDF-I3-fUw"/>
@@ -215,7 +216,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="8yW-yE-pEF">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8yW-yE-pEF">
                                             <rect key="frame" x="10" y="10" width="90.5" height="129.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="8yW-yE-pEF" secondAttribute="height" multiplier="1.4:2" id="hDe-S9-rkD"/>
@@ -261,6 +262,7 @@
                                     <outlet property="postImageView" destination="8yW-yE-pEF" id="y2b-Xn-V3p"/>
                                     <outlet property="timeLabel" destination="cuJ-9h-qMf" id="ohF-iY-NSs"/>
                                     <outlet property="titleLabel" destination="lLM-Hb-os6" id="Ocw-ze-qv1"/>
+                                    <segue destination="qAd-ya-xII" kind="showDetail" identifier="detailSegueID" id="Ky2-bR-TzX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -270,13 +272,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Shows" id="s9b-io-8Ij"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BEJ-GK-ZKh">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VA-u4-kzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3693" y="-1108"/>
+            <point key="canvasLocation" x="3814" y="-1146"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fBi-lB-PuU">
@@ -298,7 +297,7 @@
         <!--Split View Controller-->
         <scene sceneID="Iaz-RR-9Ye">
             <objects>
-                <splitViewController id="Pdl-Wn-ikL" customClass="SplitViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="Pdl-Wn-ikL" sceneMemberID="viewController">
                     <connections>
                         <segue destination="RDm-N3-VTG" kind="relationship" relationship="masterViewController" id="Cqf-ux-vPJ"/>
                         <segue destination="qAd-ya-xII" kind="relationship" relationship="detailViewController" id="el0-Lj-ZqE"/>
@@ -328,7 +327,7 @@
             <point key="canvasLocation" x="3160.8000000000002" y="-372.86356821589209"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="1" width="300" height="300"/>
-    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="el0-Lj-ZqE"/>
+    </inferredMetricsTieBreakers>
 </document>

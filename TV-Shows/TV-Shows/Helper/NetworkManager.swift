@@ -46,7 +46,6 @@ final class NetworkManager {
   }
   
   func getShows(date:Date, completion: @escaping (Result<Day>) -> ()) {
-
     let request = self.buildRequest(from: ShowApi.schedule(country: "US", date: date))
     let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
       let response = response as? HTTPURLResponse

@@ -12,7 +12,6 @@
 		5A6E701B20D8766F00AA54BD /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E701A20D8766F00AA54BD /* Day.swift */; };
 		5A6E701D20D8A77C00AA54BD /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E701C20D8A77B00AA54BD /* DateExtension.swift */; };
 		5A6E701F20D8B11800AA54BD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E701E20D8B11800AA54BD /* DetailViewController.swift */; };
-		5A6E702120D8D90F00AA54BD /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E702020D8D90E00AA54BD /* SplitViewController.swift */; };
 		5A9DC65F20D726220074A26F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9DC65E20D726220074A26F /* AppDelegate.swift */; };
 		5A9DC66420D726220074A26F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9DC66220D726220074A26F /* Main.storyboard */; };
 		5A9DC66920D726240074A26F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A9DC66820D726240074A26F /* Assets.xcassets */; };
@@ -44,7 +43,6 @@
 		5A6E701A20D8766F00AA54BD /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		5A6E701C20D8A77B00AA54BD /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		5A6E701E20D8B11800AA54BD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		5A6E702020D8D90E00AA54BD /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		5A9DC65B20D726220074A26F /* TV-Shows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV-Shows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9DC65E20D726220074A26F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A9DC66320D726220074A26F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 				5A9DC68520D73E1B0074A26F /* Storyboards */,
 				5A9DC68420D73E190074A26F /* Helper */,
 				5A9DC68120D73E090074A26F /* Other */,
-				5A9DC65E20D726220074A26F /* AppDelegate.swift */,
 				5A9DC66D20D726240074A26F /* Info.plist */,
 			);
 			path = "TV-Shows";
@@ -182,9 +179,9 @@
 		5A9DC68820D73E3F0074A26F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5A9DC65E20D726220074A26F /* AppDelegate.swift */,
 				5A6E701620D8525D00AA54BD /* ShowTableViewController.swift */,
 				5A6E701E20D8B11800AA54BD /* DetailViewController.swift */,
-				5A6E702020D8D90E00AA54BD /* SplitViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,10 +304,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TV-Shows/Pods-TV-Shows-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +365,6 @@
 				5A6E701F20D8B11800AA54BD /* DetailViewController.swift in Sources */,
 				5A9DC68E20D748F30074A26F /* ShowApi.swift in Sources */,
 				5A9DC68A20D73F830074A26F /* NetworkManager.swift in Sources */,
-				5A6E702120D8D90F00AA54BD /* SplitViewController.swift in Sources */,
 				5A6E701D20D8A77C00AA54BD /* DateExtension.swift in Sources */,
 				5A6E701920D8596100AA54BD /* ShowTableViewCell.swift in Sources */,
 				5A9DC65F20D726220074A26F /* AppDelegate.swift in Sources */,
